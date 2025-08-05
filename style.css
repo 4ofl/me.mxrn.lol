@@ -48,8 +48,8 @@ body {
 }
 
 .card {
-	background: rgba(255, 255, 255, 0); /* translucent glass */
-	border: 1px solid rgba(255, 255, 255, 0.1); /* glass edge */
+	background: rgba(255, 255, 255, 0);
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(4px);
 	/* saturate(180%); */
 	-webkit-backdrop-filter: blur(4px);

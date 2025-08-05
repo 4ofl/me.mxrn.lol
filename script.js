@@ -22,12 +22,10 @@ splash.addEventListener("click", () => {
 		splash.style.display = "none";
 		main.style.opacity = 1;
 
-		// play the background video
 		bgVideo.play().catch((e) => {
 			console.warn("video play failed:", e);
 		});
 
-		// start typing
 		startTyping(
 			(str) =>
 				(document.querySelector(".username").textContent = `@${str}`),
