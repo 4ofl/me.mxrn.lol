@@ -1,4 +1,5 @@
 {
+	"rewrites": [{ "source": "/", "destination": "/index.html" }],
 	"redirects": [
 		{
 			"source": "/discord",
@@ -14,6 +15,12 @@
 			"source": "/spotify",
 			"destination": "https://open.spotify.com/user/31ansvjxy2mtwcto3g2lavgwu3x4",
 			"permanent": true
+		},
+		{
+			"source": "/((?!$|discord|github|spotify).*)",
+			"destination": "/404",
+			"permanent": false
 		}
-	]
+	],
+	"cleanUrls": true
 }
