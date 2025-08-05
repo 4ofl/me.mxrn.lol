@@ -92,17 +92,16 @@ body {
 .links a img {
 	width: 36px;
 	height: 36px;
-	opacity: 0.85;
-	filter: drop-shadow(0 0 2px #fff2);
-	transition: opacity 0.2s ease, transform 0.2s ease;
+	opacity: 1;
+	/* filter: drop-shadow(0 0 2px #fff2); */
+	transition: transform 0.2s ease;
 }
 
 .links a:hover img {
-	opacity: 1;
 	transform: scale(1.2);
 }
 
-/* splash animated text */
+/* splash "animated"" text */
 .splash-text {
 	display: flex;
 	gap: 0.05em;
