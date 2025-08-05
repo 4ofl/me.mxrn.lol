@@ -1,48 +1,41 @@
-const lines = [
-	"[system booting...]",
-	"loading core modules...",
-	"establishing connection...",
-	"authentication handshake accepted.",
-	"",
-	"press anywhere to enter",
-];
-
-const bootText = document.getElementById("boot-text");
 const splash = document.getElementById("splash");
 const main = document.getElementById("main");
+const animatedText = document.getElementById("animated-text");
+const text = animatedText.textContent;
 
-let i = 0;
+animatedText.textContent = "";
 
-function typeLine() {
-	if (i < lines.length) {
-		const line = lines[i];
-		let j = 0;
-		const interval = setInterval(() => {
-			if (j <= line.length) {
-				bootText.innerHTML += line[j] || "";
-				j++;
-			} else {
-				bootText.innerHTML += "\n";
-				clearInterval(interval);
-				i++;
-				setTimeout(typeLine, 300);
-			}
-		}, 30);
-	}
-}
-
-typeLine();
-
-splash.addEventListener("click", () => {
-	splash.style.display = "none";
-	main.style.opacity = 1;
+[...text].forEach((char, i) => {
+	const span = document.createElement("span");
+	span.textContent = char;
+	span.style.animationDelay = `${i * 0.1}s`;
+	animatedText.appendChild(span);
 });
 
-// title typewriter
-type((str) => (document.title = `@${str}`), 500, 250);
+// splash click event
+splash.addEventListener("click", () => {
+	splash.style.opacity = 0;
+	setTimeout(() => {
+		splash.style.display = "none";
+		main.style.opacity = 1;
 
-function type(fn, delay = 1000, speed = 250) {
-	const titles = ["b4_", "4ofl", "scab"];
+		// start type animations
+		startTyping(
+			(str) =>
+				(document.querySelector(".username").textContent = `${str}`),
+			800,
+			200,
+			["b4_", "4ofl", "scab"]
+		);
+	}, 1000);
+});
+
+startTyping((str) => (document.title = `${str} - mxrn.lol`), 800, 200, [
+	"scab",
+]);
+
+// typewriter loop
+function startTyping(fn, delay = 1000, speed = 250, titles = ["default_"]) {
 	let i = 0,
 		j = 0,
 		isDeleting = false;
