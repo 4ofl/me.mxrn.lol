@@ -16,7 +16,7 @@
 			"permanent": true
 		},
 		{
-			"source": "/(.*)",
+			"source": "/((?!index\\.html|css|js|assets).*)",
 			"destination": "/",
 			"permanent": false
 		}
