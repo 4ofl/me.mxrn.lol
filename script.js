@@ -13,24 +13,32 @@ animatedText.textContent = "";
 });
 
 // splash click event
+const bgVideo = document.getElementById("bg-video");
+
 splash.addEventListener("click", () => {
 	splash.style.opacity = 0;
+
 	setTimeout(() => {
 		splash.style.display = "none";
 		main.style.opacity = 1;
 
-		// start type animations
+		// play the background video
+		bgVideo.play().catch((e) => {
+			console.warn("video play failed:", e);
+		});
+
+		// start typing
 		startTyping(
 			(str) =>
-				(document.querySelector(".username").textContent = `${str}`),
-			800,
+				(document.querySelector(".username").textContent = `@${str}`),
+			2000,
 			200,
-			["b4_", "4ofl", "scab"]
+			["aby", "b4_", "4ofl", "scab"]
 		);
 	}, 1000);
 });
 
-startTyping((str) => (document.title = `${str} - mxrn.lol`), 800, 200, [
+startTyping((str) => (document.title = `${str} - mxrn.lol`), 1250, 250, [
 	"scab",
 ]);
 
