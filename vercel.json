@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/discord",
+      "destination": "https://discord.com/users/1310480351008657420",
+      "permanent": true
+    },
+    {
+      "source": "/github",
+      "destination": "https://github.com/4ofl",
+      "permanent": true
+    },
+    {
+      "source": "/spotify",
+      "destination": "https://open.spotify.com/user/31ansvjxy2mtwcto3g2lavgwu3x4",
+      "permanent": true
+    }
+  ]
+}
