@@ -36,11 +36,33 @@ splash.addEventListener("click", () => {
 	}, 1000);
 });
 
+// flex? effect
+const card = document.querySelector(".card");
+
+card.addEventListener("mousemove", (e) => {
+	const rect = card.getBoundingClientRect();
+	const x = e.clientX - rect.left;
+	const y = e.clientY - rect.top;
+
+	const centerX = rect.width / 2;
+	const centerY = rect.height / 2;
+
+	const rotateX = ((y - centerY) / centerY) * -10;
+	const rotateY = ((x - centerX) / centerX) * 10;
+
+	card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+card.addEventListener("mouseleave", () => {
+	card.style.transform = "rotateX(0deg) rotateY(0deg)";
+});
+
+// typewriter title
+
 startTyping((str) => (document.title = `${str} - mxrn.lol`), 1250, 250, [
 	"scab",
 ]);
 
-// typewriter loop
 function startTyping(fn, delay = 1000, speed = 250, titles = ["default_"]) {
 	let i = 0,
 		j = 0,
