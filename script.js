@@ -4,7 +4,6 @@ const animatedText = document.getElementById("animated-text");
 const text = animatedText.textContent;
 
 animatedText.textContent = "";
-
 [...text].forEach((char, i) => {
 	const span = document.createElement("span");
 	span.textContent = char;
@@ -12,7 +11,6 @@ animatedText.textContent = "";
 	animatedText.appendChild(span);
 });
 
-// splash click event
 const bgVideo = document.getElementById("bg-video");
 
 splash.addEventListener("click", () => {
@@ -22,59 +20,92 @@ splash.addEventListener("click", () => {
 		splash.style.display = "none";
 		main.style.opacity = 1;
 
-		bgVideo.play().catch((e) => {
-			console.warn("video play failed:", e);
-		});
+		bgVideo.play().catch((e) => console.warn("video play failed:", e));
 
 		startTyping(
 			(str) =>
 				(document.querySelector(".username").textContent = `@${str}`),
 			2000,
-			200,
-			["aby", "b4_", "4ofl", "scab"]
+			150,
+			80,
+			["4ofl", "scab", "b4_", "aby"]
+		);
+
+		startTyping(
+			(str) => (document.querySelector(".bio").textContent = str),
+			1000,
+			100,
+			10,
+			[">_<", "^_^"]
 		);
 	}, 1000);
 });
 
-// flex? effect
-const card = document.querySelector(".card");
-
-card.addEventListener("mousemove", (e) => {
-	const rect = card.getBoundingClientRect();
-	const x = e.clientX - rect.left;
-	const y = e.clientY - rect.top;
-
-	const centerX = rect.width / 2;
-	const centerY = rect.height / 2;
-
-	const rotateX = ((y - centerY) / centerY) * -10;
-	const rotateY = ((x - centerX) / centerX) * 10;
-
-	card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-});
-
-card.addEventListener("mouseleave", () => {
-	card.style.transform = "rotateX(0deg) rotateY(0deg)";
-});
-
-// typewriter title
-
-startTyping((str) => (document.title = `${str} - mxrn.lol`), 1250, 250, [
+startTyping((str) => (document.title = `@${str} | mxrn.lol`), 2000, 200, 200, [
 	"scab",
 ]);
 
-function startTyping(fn, delay = 1000, speed = 250, titles = ["default_"]) {
+// document.title = "scab | mxrn.lol";
+
+// const cursor = document.createElement("div");
+// cursor.classList.add("cursor");
+// document.body.appendChild(cursor);
+
+// const trailCount = 10;
+// const trails = [];
+
+// for (let i = 0; i < trailCount; i++) {
+// 	const trailDot = document.createElement("div");
+// 	trailDot.classList.add("trail");
+// 	document.body.appendChild(trailDot);
+// 	trails.push(trailDot);
+// }
+
+// let mouseX = 0,
+// 	mouseY = 0;
+
+// document.addEventListener("mousemove", (e) => {
+// 	mouseX = e.clientX;
+// 	mouseY = e.clientY;
+// 	cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+// });
+
+// function animateTrail() {
+// 	let x = mouseX;
+// 	let y = mouseY;
+
+// 	for (let i = 0; i < trails.length; i++) {
+// 		const dot = trails[i];
+// 		setTimeout(() => {
+// 			dot.style.transform = `translate(${x}px, ${y}px)`;
+// 		}, i * 20);
+// 		x -= (x - mouseX) * 0.1;
+// 		y -= (y - mouseY) * 0.1;
+// 	}
+
+// 	requestAnimationFrame(animateTrail);
+// }
+
+// animateTrail();
+
+function startTyping(
+	fn,
+	delay = 1000,
+	typeSpeed = 250,
+	deleteSpeed = 100,
+	words = ["default_"]
+) {
 	let i = 0,
 		j = 0,
 		isDeleting = false;
 
 	function tick() {
-		const title = titles[i];
-		const current = isDeleting ? title.slice(0, j--) : title.slice(0, j++);
+		const word = words[i];
+		const current = isDeleting ? word.slice(0, j--) : word.slice(0, j++);
 
 		fn(current);
 
-		if (!isDeleting && j === title.length + 1) {
+		if (!isDeleting && j === word.length + 1) {
 			isDeleting = true;
 			setTimeout(tick, delay);
 			return;
@@ -82,10 +113,10 @@ function startTyping(fn, delay = 1000, speed = 250, titles = ["default_"]) {
 
 		if (isDeleting && j === 0) {
 			isDeleting = false;
-			i = (i + 1) % titles.length;
+			i = (i + 1) % words.length;
 		}
 
-		setTimeout(tick, speed);
+		setTimeout(tick, isDeleting ? deleteSpeed : typeSpeed);
 	}
 
 	tick();
